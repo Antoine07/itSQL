@@ -120,3 +120,43 @@ SET `birth_date` = '1978-02-04 00:00:00',
     `next_flight` = '2020-12-04 09:50:52',
     `num_jobs` = 10
 WHERE name = 'Tom';
+
+
+DROP TABLE pilots ;  -- grosse betise
+
+-- dans la table new_pilots on récupère la définition de la table pilots ...
+
+SHOW CREATE TABLE pilots;
+
+CREATE TABLE `pilots` (
+  `certificate` varchar(6) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `numFlying` decimal(7,1) DEFAULT NULL,
+  `compagny` char(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `next_flight` datetime DEFAULT NULL,
+  `num_jobs` smallint(5) unsigned DEFAULT NULL,
+  `birth_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO
+    pilots (
+        `certificate` ,
+        `numFlying` ,
+        `compagny` ,
+        `name` ,
+        `created` ,
+        `next_flight` ,
+        `num_jobs` ,
+        `birth_date` 
+) SELECT `compagny`, `name` FROM `new_pilots`;
+
+-- attention à l'ordre des champs dans la ré-insertion des donées
+
+-- INSERT INTO
+--     pilots (
+      
+--         `compagny` ,
+--         `name` ,
+       
+-- ) SELECT `compagny`, `name` FROM `new_pilots`;
