@@ -61,3 +61,31 @@ SELECT `name`, compagny FROM pilots WHERE `compagny` like 'f%' ;
 -- Sélectionnez tous les pilotes dont le nom de la compagnie contient un I suivi d'un caractère.
 
 SELECT `name`, compagny FROM pilots WHERE compagny LIKE '%i_';
+
+-- ajout de bonus
+
+ALTER TABLE pilots ADD bonus INT AFTER num_jobs ;
+
+ALTER TABLE pilots MODIFY bonus SMALLINT UNSIGNED AFTER num_jobs ;
+
+
+UPDATE pilots SET bonus= 1000 WHERE certificate IN ('ct-1','ct-11','ct-12');
+UPDATE pilots SET bonus= 2000 WHERE certificate='ct-56';
+UPDATE pilots SET bonus= 500 WHERE certificate NOT IN ('ct-1','ct-11','ct-12','ct-56');
+
+-- Faites une requête permettant de sélectionner le pilote ayant eu le meilleur bonus. Vous pouvez utiliser la fonction max de MySQL.
+
+SELECT `name`, compagny 
+FROM pilots
+WHERE bonus = (SELECT MAX(bonus) FROM pilots);
+
+-- Combien y-a-t-il d'heure de vols distincts dans la table pilotes ?
+SELECT  COUNT(DISTINCT(numFlying)) as nb_pilots
+FROM pilots;
+
+
+-- Combien de pilotes sont en dessous de la moyenne d'heure de vols ?
+
+SELECT COUNT(*) 
+FROM pilots
+WHERE numFlying < (SELECT AVG(numFlying) FROM pilots);
