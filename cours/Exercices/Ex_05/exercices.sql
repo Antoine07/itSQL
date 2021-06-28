@@ -73,6 +73,15 @@ UPDATE pilots SET bonus= 1000 WHERE certificate IN ('ct-1','ct-11','ct-12');
 UPDATE pilots SET bonus= 2000 WHERE certificate='ct-56';
 UPDATE pilots SET bonus= 500 WHERE certificate NOT IN ('ct-1','ct-11','ct-12','ct-56');
 
+UPDATE pilots SET bonus = 
+    CASE 
+        WHEN certificate IN ('ct-1','ct-11','ct-12') THEN 1000
+        WHEN certificate='ct-56' THEN 2000
+    ELSE 500
+    END
+;
+
+
 -- Faites une requête permettant de sélectionner le pilote ayant eu le meilleur bonus. Vous pouvez utiliser la fonction max de MySQL.
 
 SELECT `name`, compagny 
@@ -89,3 +98,35 @@ FROM pilots;
 SELECT COUNT(*) 
 FROM pilots
 WHERE numFlying < (SELECT AVG(numFlying) FROM pilots);
+
+-- Quelles sont les coordonnées des compagnies qui employe(nt) des pilotes faisant moins de 90 heures de vols ?
+
+SELECT numStreet, street, city 
+FROM compagnies 
+WHERE comp IN ( 
+    SELECT compagny FROM pilots WHERE numFlying < 90 
+);
+
+-- Faites la somme des heures de vols des pilotes de la compagnie d'Air France.
+
+SELECT SUM(numFlying) as total
+FROM pilots 
+WHERE compagny IN (
+    SELECT comp
+    FROM compagnies
+    WHERE name = "Air France"
+);
+
+-- comp = ITA, street = mapoli, city = Rome, name = Italia Air, numStreet = 20
+
+INSERT INTO compagnies (comp, street, city, `name`, numStreet) 
+VALUES ('ITA','mapoli', 'Rome', 'Italia Air', 20);
+
+-- Trouvez toute(s) les/la compagnie(s) n'ayant pas de pilotes.
+
+SELECT numStreet, street, city 
+FROM compagnies
+WHERE comp NOT IN (
+    SELECT compagny
+    FROM pilots
+);
