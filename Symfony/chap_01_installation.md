@@ -267,6 +267,10 @@ Le fichier **base.html.twig** est un fichier que les vues composites comme **ind
 
 **Fichier home.html.twig nous injectons la data title qui vient de l'action index de notre contrôleur :**
 
+## Exercice
+
+Créez une page contact. Utilisez le Bootstrap Twitter récupérez les assets en CDN pour la mise en forme graphique de la page. Vous définierez dans le controleur BarController une nouvelle route pour servir la page.
+
 ```html
 
 {% extends('base.html.twig') %}
