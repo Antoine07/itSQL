@@ -5,8 +5,6 @@ spl_autoload_register(function ($className) {
 
     $className = substr(trim( $className, '\\' ),4);
 
-    die($className);
-
     $fileName = str_replace('\\', DIRECTORY_SEPARATOR, $className) . ".php"; // le nom de la classe c'est le nom du fichier
     var_dump($fileName);
 
