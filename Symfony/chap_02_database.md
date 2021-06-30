@@ -111,6 +111,17 @@ Par la suite vous taperez la ligne suivante afin de créer les tables en base de
 php bin/console doctrine:migrations:migrate
 ```
 
+Si vous avez déjà une migration dans le dossier migrations vous tapez les lignes de commandes suivantes :
+
+```bash
+# Création du fichier de migration en étudiant l'état de votre de base de données
+# Cette commande peut vous expliciter qu'il y a une erreur dans votre modification
+php bin/console doctrine:migrations:diff
+
+# Tapez cette commande pour modifier la base de données
+php bin/console doctrine:migrations:migrate
+```
+
 ## Insertion de données dans la table Beer
 
 Nous allons maintenant créer quelques bières et les afficher en page d'accueil, nous allons pour se faire créer une méthode spécifique dans notre contrôleur BarController.
@@ -247,6 +258,7 @@ php bin/console make:entity
 # et étudie la différence
 php bin/console doctrine:migrations:diff
 
+# pensez à faire la commande pour modifier la base de données
 ```
 
 Mettez à jour les fixtures en ajoutant à l'aide de faker des prix et des degrées à vos bières.
