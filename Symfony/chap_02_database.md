@@ -85,6 +85,12 @@ Création des tables
 php bin/console doctrine:migrations:migrate
 ```
 
+## Exercice
+
+Créez la table Country avec les champs décrit dans le diagramme UML.
+
+Ne faites pour l'instant la relation entre les tables Beer et Country
+
 ## Exercice Création de l'entité Category
 
 Créez simplement la table Category avec un name uniquement, puis indiquez à Doctrine que vous souhaitez mettre en relation Beer et Category dans une relation ManyToMany, une bière peut se trouver dans une ou plusieurs catégories et réciproquement une catégorie peut contenir plusieurs bières.
