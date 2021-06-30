@@ -19,7 +19,7 @@ class BarController extends AbstractController
     }
 
     /**
-     * @Route("/bar", name="bar")
+     * @Route("/home", name="home")
      */
     public function index(): Response
     {

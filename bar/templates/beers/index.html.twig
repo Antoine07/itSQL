@@ -6,19 +6,18 @@
 {% block body %}
 	<div class="row">
 		<div class="col-md-12">
-			<div class="card">
-				{% if beers %}
-					<ul>
-						{% for beer in beers %}
-							<li>Name : {{ beer.name }}
-								degree :
-								{{ beer.degree }}</li>
-						{% endfor %}
-					</ul>
-				{% else %}
-					<p>Aucune bière</p>
-				{% endif %}
-			</div>
+			{% if beers %}
+				{% for beer in beers %}
+					<div class="card">
+						<div class="card-body">
+							<h2 class="card-title">Name :{{ beer.name }}</h2>
+							<p class="card-text">Degree :{{ beer.degree }}</p>
+						</div>
+					</div>
+				{% endfor %}
+			{% else %}
+				<p>Aucune bière</p>
+			{% endif %}
 		</div>
 	</div>
-{% endblock %}
+</div>{% endblock %}
