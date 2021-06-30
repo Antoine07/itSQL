@@ -122,6 +122,8 @@ php bin/console doctrine:migrations:diff
 php bin/console doctrine:migrations:migrate
 ```
 
+Ajoutez maintenant un champ rating à l'entité Beer, puis mettez à jour votre base de données.
+
 ## Insertion de données dans la table Beer
 
 Nous allons maintenant créer quelques bières et les afficher en page d'accueil, nous allons pour se faire créer une méthode spécifique dans notre contrôleur BarController.
