@@ -1,1 +1,6 @@
 @import "~bootstrap/dist/css/bootstrap";
+
+body{
+    background-color:  bisque;
+    font-size: 2.5rem;
+}

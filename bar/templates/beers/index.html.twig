@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page Beers
+{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				{% if beers %}
+					<ul>
+						{% for beer in beers %}
+							<li>Name : {{ beer.name }}
+								degree :
+								{{ beer.degree }}</li>
+						{% endfor %}
+					</ul>
+				{% else %}
+					<p>Aucune bière</p>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}
