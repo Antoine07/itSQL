@@ -220,7 +220,7 @@ class AppFixtures extends Fixture
 
 ## Exercice Faker et AppFixtures
 
-Insérez des bières à l'aide de AppFixture et de Faker, puis tapez la ligne de commande suivante :
+Insérez 20 bières à l'aide de AppFixture et de Faker, puis tapez la ligne de commande suivante pour les insérer en base de données
 
 ```bash
 php bin/console doctrine:fixtures:load
