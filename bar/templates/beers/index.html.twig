@@ -12,7 +12,10 @@
 						<div class="card-body">
 							<h2 class="card-title">Name :{{ beer.name }}</h2>
 							<p class="card-text">Degree :{{ beer.degree }}</p>
+							<p class="card-text">Date :{{ beer.publishedAt | date('d-m-y h:s:m') }}</p>
+							<p class="card-text">Rating :{{ beer.rating }}</p>
 							<img src="{{ asset('build/images/beer_00.jpeg') }}" />
+							<p>{{ beer.description }}</p>
 						</div>
 					</div>
 				{% endfor %}

@@ -4,7 +4,7 @@ namespace App\DataFixtures;
 
 use Faker;
 use App\Entity\Beer;
-
+use App\Entity\Country;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -15,21 +15,31 @@ class AppFixtures extends Fixture
     {
         $faker = Faker\Factory::create('fr_FR');
 
-        $beer = new Beer();
-        $beer->setname('Super Beer');
-        $beer->setPublishedAt(new \DateTime());
-        $beer->setDescription('Ergonomic and stylish!');
-        $beer->setRating(rand(0, 10));
-        $beer->setStatus(rand(0, 1) ? "available" : "unavailable");
+        // créez 4 pays Country 
+        $manager->flush();
+        // associer un pays au hasard à chaque bière
+        $repoCountry = $manager->getRepository(Country::class);
 
-        $degrees = [0, 5, 4.5, 8, 9.5];
-        $rand_key = array_rand($degrees, 1);
+        $countries = $repoCountry->findAll();
 
-        $beer->setDegree($degrees[$rand_key]);
+        $count = 20;
+        while($count > 0) {
+            $beer = new Beer();
+            $beer->setname($faker->company);
+            $beer->setPublishedAt(new \DateTime());
+            $beer->setDescription($faker->catchPhrase);
+            $beer->setRating(rand(0, 10));
+            $beer->setStatus(rand(0, 1) ? "available" : "unavailable");
+            $beer->setDegree($faker->randomFloat(1, 0, 10));
 
-        // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        // git add 
-        $manager->persist($beer);
+            // tell Doctrine you want to (eventually) save the Product (no queries yet)
+            // git add 
+            $manager->persist($beer);
+
+            $count--;
+        }
+
+
 
         $manager->flush();
     }
