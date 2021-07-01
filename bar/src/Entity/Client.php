@@ -30,7 +30,7 @@ class Client
     private $email;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="smallint", nullable=true, options={"unsigned" : true, "default" : 0} )
      */
     private $conso;
 

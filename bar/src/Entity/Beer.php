@@ -12,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Beer
 {
+
+    const STATUS_AVAILABLE = "available";
+    const STATUS_UNAVAILABLE = "unavailable";
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -49,10 +53,23 @@ class Beer
      */
     private $clients;
 
+    /**
+     * @ORM\Column(type="smallint", nullable=true, options={"unsigned" : true })
+     */
+    private $rating;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $status;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->clients = new ArrayCollection();
+
+        // mettre une valeur par défaut
+        $this->status = self::STATUS_AVAILABLE ;
     }
 
     public function getId(): ?int
@@ -155,6 +172,35 @@ class Beer
         if ($this->clients->removeElement($client)) {
             $client->removeBeer($this);
         }
+
+        return $this;
+    }
+
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    public function setRating(?int $rating): self
+    {
+        $this->rating = $rating;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        
+        if(!in_array($status, [self::STATUS_AVAILABLE, self::STATUS_UNAVAILABLE])){
+            throw new \InvalidArgumentException("Invalid status");
+        }
+
+        $this->status = $status;
 
         return $this;
     }
