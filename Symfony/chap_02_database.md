@@ -124,6 +124,16 @@ php bin/console doctrine:migrations:migrate
 
 Ajoutez maintenant un champ rating à l'entité Beer, puis mettez à jour votre base de données.
 
+## Exercice table client
+
+Créez maintenant l'entité Client avec les champs suivants :
+
+- name champ obligatoire
+- email
+- conso <-- permet de calculer la quantité de bières consommées
+
+Un client consomme de 0 à N bières et une bière est consommée par un client au plus.
+
 ## Insertion de données dans la table Beer
 
 Nous allons maintenant créer quelques bières et les afficher en page d'accueil, nous allons pour se faire créer une méthode spécifique dans notre contrôleur BarController.
