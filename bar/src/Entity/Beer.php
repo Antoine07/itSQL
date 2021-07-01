@@ -44,9 +44,15 @@ class Beer
      */
     private $categories;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Client::class, mappedBy="beers")
+     */
+    private $clients;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->clients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -122,6 +128,33 @@ class Beer
     public function removeCategory(Category $category): self
     {
         $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Client[]
+     */
+    public function getClients(): Collection
+    {
+        return $this->clients;
+    }
+
+    public function addClient(Client $client): self
+    {
+        if (!$this->clients->contains($client)) {
+            $this->clients[] = $client;
+            $client->addBeer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClient(Client $client): self
+    {
+        if ($this->clients->removeElement($client)) {
+            $client->removeBeer($this);
+        }
 
         return $this;
     }
