@@ -16,6 +16,9 @@
 							<p class="card-text">Rating :{{ beer.rating }}</p>
 							<img src="{{ asset('build/images/beer_00.jpeg') }}" />
 							<p>{{ beer.description }}</p>
+							{% if beer.country %}
+								<p>Country : {{ beer.country.name }}</p>
+							{% endif %}
 						</div>
 					</div>
 				{% endfor %}

@@ -16,6 +16,17 @@ class AppFixtures extends Fixture
         $faker = Faker\Factory::create('fr_FR');
 
         // créez 4 pays Country 
+        $count = 4;
+        while($count > 0){  
+            $country = new Country();
+            $country->setName($faker->country);
+            $country->setAddress($faker->streetAddress);
+            $country->setEmail($faker->email);
+            $manager->persist($country);
+
+            $count--;
+        }
+
         $manager->flush();
         // associer un pays au hasard à chaque bière
         $repoCountry = $manager->getRepository(Country::class);
@@ -31,6 +42,8 @@ class AppFixtures extends Fixture
             $beer->setRating(rand(0, 10));
             $beer->setStatus(rand(0, 1) ? "available" : "unavailable");
             $beer->setDegree($faker->randomFloat(1, 0, 10));
+
+            $beer->setCountry($countries[rand(0,3)]);
 
             // tell Doctrine you want to (eventually) save the Product (no queries yet)
             // git add 
