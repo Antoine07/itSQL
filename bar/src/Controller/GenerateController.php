@@ -32,6 +32,11 @@ class GenerateController extends AbstractController
         $beer->setRating(rand(0, 10));
         $beer->setStatus(rand(0, 1) ? "available" : "unavailable");
 
+        $degrees = [0, 5, 4.5, 8, 9.5];
+        $rand_key = array_rand($degrees, 1);
+
+        $beer->setDegree($degrees[$rand_key]);
+
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         // git add 
         $entityManager->persist($beer);
