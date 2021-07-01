@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Beer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -59,14 +60,15 @@ class BarController extends AbstractController
      */
     public function beers(): Response
     {
+        $repository = $this->getDoctrine()->getRepository(Beer::class);
+
         // dump($this->beers_api());
-
         // dd($this->beers_api()['beers']);
-
-        $beers = $this->beers_api() ;
+        // $beers = $this->beers_api() ;
 
         return $this->render('beers/index.html.twig', [
-            'beers' => $this->beers_api()['beers'],
+            //'beers' => $this->beers_api()['beers'],
+            'beers' => $repository->findAll()
         ]);
     }
 
