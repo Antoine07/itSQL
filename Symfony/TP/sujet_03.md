@@ -151,6 +151,10 @@ Mettez à jour les fixtures en ajoutant à l'aide de faker des prix et des degr�
 
 Vous allez maintenant mettre des données dans la table client.
 
+## Exercice page d'accueil
+
+Affichez les trois dernières bières sur la page d'accueil.
+
 ## Exercice afficher les données des bières
 
 Améliorez l'affichage de la page des bières. Affichez une image de bière différente par bière et affichez les informations de chaque bière sur la page d'accueil.
@@ -178,3 +182,10 @@ public function showBeer(int $id)
 ## Exercice page des clients (facultatif)
 
 Créez un lient vers la page des clients, affichez les informations qui sont en relation avec ces derniers.
+
+
+```text
+    Home Beers [Clients]
+
+    information relative aux clients
+```
