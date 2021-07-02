@@ -51,6 +51,43 @@ class AppFixtures extends Fixture
 
 ```
 
+Pour gérer plusieurs fixtures pour vos données, vous pouvez utiliser la syntaxe suivante :
+
+```php
+
+namespace App\DataFixtures;
+
+// ...
+class CountryFixtures extends Fixture
+{
+    public function load(ObjectManager $manager)
+    {
+        // ...
+    }
+}
+
+// src/DataFixtures/GroupFixtures.php
+namespace App\DataFixtures;
+// ...
+
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+
+class BeerFixtures extends Fixture implements DependentFixtureInterface
+{
+    public function load(ObjectManager $manager)
+    {
+        // ...
+    }
+
+    public function getDependencies()
+    {
+        return [
+            CountryFixtures::class,
+        ];
+    }
+}
+```
+
 ## Exercice Faker et AppFixtures
 
 Insérez 20 bières à l'aide de AppFixture et de Faker, puis tapez la ligne de commande suivante pour les insérer en base de données
